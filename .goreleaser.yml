@@ -1,6 +1,6 @@
 release:
   github:
-    owner: knqyf263
+    owner: k-yamanishi
     name: holiday_jp-go
   name_template: '{{.Tag}}'
 builds:
