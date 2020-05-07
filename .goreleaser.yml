@@ -16,15 +16,15 @@ builds:
   main: .
   ldflags: -s -w -X main.version={{.Version}} -X main.commit={{.Commit}} -X main.date={{.Date}}
 archives:
-  format: zip
+- format: zip
   name_template: '{{ .Binary }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}{{ if .Arm }}v{{
     .Arm }}{{ end }}'
   files:
   - LICENSE*
   - README*
   - CHANGELOG*
-fpms:
-  bindir: /usr/local/bin
+nfpms:
+- bindir: /usr/local/bin
   formats:
   - deb
   - rpm
