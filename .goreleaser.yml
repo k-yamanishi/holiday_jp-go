@@ -15,7 +15,7 @@ builds:
   - "6"
   main: .
   ldflags: -s -w -X main.version={{.Version}} -X main.commit={{.Commit}} -X main.date={{.Date}}
-archive:
+archives:
   format: zip
   name_template: '{{ .Binary }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}{{ if .Arm }}v{{
     .Arm }}{{ end }}'
@@ -23,7 +23,7 @@ archive:
   - LICENSE*
   - README*
   - CHANGELOG*
-fpm:
+fpms:
   bindir: /usr/local/bin
   formats:
   - deb
