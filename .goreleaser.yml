@@ -24,7 +24,7 @@ archives:
   - README*
   - CHANGELOG*
 nfpms:
-- bindir: /usr/local/bin
+- 
   formats:
   - deb
   - rpm
