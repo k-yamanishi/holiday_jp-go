@@ -1,8 +1,8 @@
 env:
   - GO111MODULE=auto
-before:
-  hooks:
-    - go mod tidy
+#before:
+#  hooks:
+#    - go mod tidy
 release:
   github:
     owner: k-yamanishi
