@@ -3,6 +3,8 @@ release:
     owner: k-yamanishi
     name: holiday_jp-go
   name_template: '{{.Tag}}'
+env:
+  - GO111MODULE=on
 builds:
 - goos:
   - linux
