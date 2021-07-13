@@ -4,8 +4,6 @@ release:
     name: holiday_jp-go
   name_template: '{{.Tag}}'
 builds:
-- env:
-  - GO111MODULE=on
 - goos:
   - linux
   - windows
