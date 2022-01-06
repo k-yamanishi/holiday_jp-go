@@ -24,7 +24,7 @@ func main() {
 }
 
 func run() int {
-	f, err := Assets.Open("/holidays.yml")
+	f, err := Assets.Open("/data/holidays.yml")
 	if err != nil {
 		log.Error("Open", "Error", err)
 		return 2
