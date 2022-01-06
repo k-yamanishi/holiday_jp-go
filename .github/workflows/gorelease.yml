@@ -49,26 +49,16 @@ jobs:
           path: release_upload_url.txt
 
   upload-release:
-    strategy:
-      matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
-    needs: [create-release]
+    name: Release
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/download-artifact@v1
+      - name: Setup Go
+        uses: actions/setup-go@v2
         with:
-          name: create-release
-      - id: upload-url
-        run: |
-          echo "::set-output name=url::$(cat create-release/release_upload_url.txt)"
-      - uses: actions/download-artifact@v1
-        with:
-          name: build-${{matrix.target}}
-      - uses: actions/upload-release-asset@v1
+          go-version: 1.17
+      - name: Run GoReleaser
+        uses: goreleaser/goreleaser-action@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{steps.upload-url.outputs.url}}
-          asset_path: ./build-${{matrix.target}}/rc-${{matrix.target}}.zip
-          asset_name: rc-${{matrix.target}}.zip
-          asset_content_type: application/zip
+          args: release --rm-dist
