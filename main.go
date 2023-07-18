@@ -9,6 +9,7 @@ import (
 	yaml "gopkg.in/yaml.v2"
 )
 
+//This go:generate command is not a comment. It is executed at build time.
 //go:generate go-assets-builder -s="/data" -o holiday.go data
 
 var (
@@ -23,34 +24,35 @@ func main() {
 	os.Exit(run())
 }
 
+// 0:holiday
+// 1:normal day
+// 2:error
 func run() int {
-	f, err := Assets.Open("/holidays.yml")
-	if err != nil {
-		log.Error("Open", "Error", err)
+	f, errYml := Assets.Open("/holidays.yml")
+	if errYml != nil {
+		log.Error("Open", "Error", errYml)
 		return 2
 	}
 	defer f.Close()
 
-	b, err := ioutil.ReadAll(f)
-	if err != nil {
-		log.Error("Read", "Error", err)
+	b, errRead := ioutil.ReadAll(f)
+	if errRead != nil {
+		log.Error("Read", "Error", errRead)
 		return 2
 	}
 
 	holiday := make(map[interface{}]interface{})
-	if err = yaml.Unmarshal(b, &holiday); err != nil {
-		log.Error("YAML Unmarshal", "Error", err)
+	errYamlUnmarshal := yaml.Unmarshal(b, &holiday)
+	if errYamlUnmarshal != nil {
+		log.Error("YAML Unmarshal", "Error", errYamlUnmarshal)
 		return 2
 	}
-
+	//test code
+	//now := time.Date(2023, 5, 3, 9, 0, 0, 0, time.Local)
 	now := time.Now().In(JST)
 	d := now.Format(DateFormat)
 
 	if _, ok := holiday[d]; ok {
-		return 0
-	}
-
-	if now.Weekday() == time.Saturday || now.Weekday() == time.Sunday {
 		return 0
 	}
 
