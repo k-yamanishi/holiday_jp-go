@@ -24,7 +24,7 @@ func main() {
 	os.Exit(run())
 }
 
-// 0:holiday
+// 0:not working day
 // 1:normal day
 // 2:error
 func run() int {
