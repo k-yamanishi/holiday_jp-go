@@ -1,3 +1,4 @@
+# このファイルは現在は使用していません
 name: custom-release # 任意の名前を設定する
 on:
   push:
